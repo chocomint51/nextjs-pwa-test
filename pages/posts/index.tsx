@@ -1,24 +1,25 @@
 import Link from "next/link";
 
-export default function Boards({ data }: { data: any }) {
-  console.log(data);
+export default function Boards({ data }: any) {
   return (
     <div>
       <h1>Boards</h1>
       <div>
-        {data
-          ? data.map((board: any) => (
-              <div key={board.id}>
-                <Link
-                  href={`/posts/${board.id}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <h1>{board.title}</h1>
-                </Link>
-                <p>{board.content}</p>
-              </div>
-            ))
-          : null}
+        {data.length !== 0 ? (
+          data.map((board: any) => (
+            <div key={board._id}>
+              <Link
+                href={`/posts/${board._id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <h1>{board.title}</h1>
+              </Link>
+              <p>{board.content}</p>
+            </div>
+          ))
+        ) : (
+          <p>No posts</p>
+        )}
       </div>
     </div>
   );
