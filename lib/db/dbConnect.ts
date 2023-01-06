@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 const DB_URI = process.env.MONGODB_URI || "";
-const DB_NAME = process.env.MONGODB_NAME || "";
 
 let cached = global.mongoose;
 
@@ -15,11 +14,7 @@ async function dbConnect() {
   if (!cached.promise) {
     cached.promise = mongoose
       .set({ debug: true, strictQuery: false })
-      .connect(`${DB_URI}/${DB_NAME}`, {
-        authSource: "admin",
-        user: "test",
-        pass: "test",
-      })
+      .connect(`${DB_URI}`)
       .then((mongoose) => mongoose);
   }
 
