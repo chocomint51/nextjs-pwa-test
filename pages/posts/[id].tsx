@@ -7,7 +7,7 @@ export default function Board({ data }: { data: any }) {
   );
 }
 
-export async function getStaticProps({ params }: { params: any }) {
+export async function getServerSideProps({ params }: { params: any }) {
   const data = await fetch(
     `http://localhost:3000/api/boards/${params.id}`,
   ).then((res) => res.json());
@@ -16,14 +16,4 @@ export async function getStaticProps({ params }: { params: any }) {
       data,
     },
   };
-}
-
-export async function getStaticPaths() {
-  const data = await fetch(`http://localhost:3000/api/boards`).then((res) =>
-    res.json(),
-  );
-  const paths = data.map((board: any) => ({
-    params: { id: board.id.toString() },
-  }));
-  return { paths, fallback: true };
 }

@@ -24,7 +24,7 @@ export default function Boards({ data }: { data: any }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const data = await fetch("http://localhost:3000/api/boards").then((res) =>
     res.json(),
   );
