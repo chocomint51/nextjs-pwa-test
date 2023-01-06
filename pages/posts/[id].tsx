@@ -8,9 +8,10 @@ export default function Board({ data }: { data: any }) {
 }
 
 export async function getServerSideProps({ params }: { params: any }) {
-  const data = await fetch(
-    `http://localhost:3000/api/boards/${params.id}`,
-  ).then((res) => res.json());
+  const PROD_API = process.env.PROD_API;
+  const DEV_API = process.env.DEV_API;
+  const api = process.env.NODE_ENV === "production" ? PROD_API : DEV_API;
+  const data = await fetch(`${api}/${params.id}`).then((res) => res.json());
   return {
     props: {
       data,

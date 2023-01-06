@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-export default function Write() {
+export default function Write({ api }: any) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -9,7 +9,7 @@ export default function Write() {
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:3000/api/boards", {
+    const res = await fetch(`${api}/boards`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,4 +45,13 @@ export default function Write() {
       </form>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const PROD_API = process.env.PROD_API;
+  const DEV_API = process.env.DEV_API;
+  const api = process.env.NODE_ENV === "production" ? PROD_API : DEV_API;
+  return {
+    props: { api },
+  };
 }
