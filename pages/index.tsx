@@ -15,12 +15,12 @@ const Title = styled.h1<{ x: any; y: any }>`
   font-size: 60px;
   font-weight: 600;
   margin: 1rem;
-  text-shadow: ${(props) => `${props.x / 100}px ${props.y / 100}px gray`};
+  text-shadow: ${(props) => `${props.x / 100}px ${props.y / 60}px gray`};
 `;
 
 export default function Home() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const windowCenter = { x: window.innerWidth / 2, y: window.innerHeight / 3 };
+  const [windowCenter, setWindowCenter] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const updateMousePosition = (e: any) => {
@@ -30,6 +30,14 @@ export default function Home() {
     return () => {
       window.removeEventListener("mousemove", updateMousePosition);
     };
+  }, []);
+
+  useEffect(() => {
+    const windowCenter = {
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 3,
+    };
+    setWindowCenter(windowCenter);
   }, []);
 
   return (
