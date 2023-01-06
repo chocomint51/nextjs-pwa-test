@@ -1,4 +1,38 @@
 import { useRouter } from "next/router";
+import styled from "styled-components";
+
+// round border and shadow
+// shadow follow the cursor
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
+
+const Title = styled.h1`
+  font-size: 50px;
+  font-weight: 600;
+`;
+
+const Content = styled.p`
+  font-size: 30px;
+  font-weight: 400;
+`;
+
+const Button = styled.button`
+  width: 100px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  background-color: #e5e5e5;
+  cursor: pointer;
+  &:hover {
+    background-color: #d5d5d5;
+  }
+`;
 
 export default function Board({ data, api }: any) {
   const router = useRouter();
@@ -12,11 +46,11 @@ export default function Board({ data, api }: any) {
   };
 
   return (
-    <div>
-      <h1>{data.title}</h1>
-      <p>{data.content}</p>
-      <button onClick={handleDelete}>삭제하기</button>
-    </div>
+    <Container>
+      <Title>{data.title}</Title>
+      <Content>{data.content}</Content>
+      <Button onClick={handleDelete}>삭제하기</Button>
+    </Container>
   );
 }
 
